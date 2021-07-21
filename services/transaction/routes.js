@@ -16,9 +16,29 @@ transactionRouter.post('/send', (req, res) => {
 	const toAddress = req.body.toAddress;
 	const amount = req.body.amount;
 
-	const dataString = `{"jsonrpc: "1.0", "id": "curltext", "method": "sendtoaddress", "params": ["${toAddress}", ${amount}] }`
+	const dataString = `{"jsonrpc: "1.0", "id": "curltext", "method": "sendtoaddress", "params": ["${toAddress}", ${amount}] }`;
 	const options = {
 		url: `http://${USER}:${PASS}@127.0.0.1:8332/`,
+		method: 'POST',
+		headers: headers,
+		body: dataString
+	};
+
+	callback = (error, response, body) => {
+		if (!error && response.statusCode == 200) {
+			const data = JSON.parse(body);
+			res.send(data);
+		}
+	};
+	request(options, callback);
+});
+
+transactionRouter.get('/get/:txid', (req, res) => {
+	const txid = req.params.txid;
+
+	const dataString = `{"jsonrpc": "1.0", "id": "curltest", "method": "gettransaction", "params": ["${txid}"] }`;
+	const options = {
+		url: `https://${USER}:${PASS}@127.0.0.1:8332/`,
 		method: 'POST',
 		headers: headers,
 		body: dataString
