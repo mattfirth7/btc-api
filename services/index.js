@@ -1,9 +1,9 @@
-import express from 'express';
+const express = require('express');
 
-import { walletRouter } from './wallet';
-import { transactionRouter } from './transaction';
+const walletRouter = require('./wallet');
 
-export const services = express.Router();
+const services = express.Router();
 
 services.use('/wallet', walletRouter);
-services.use('/transaction', transactionRouter);
+
+module.exports = services;
