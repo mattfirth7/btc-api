@@ -28,7 +28,7 @@ walletRouter.post("/create", (req, res) => {
 
 	// Neatly organizes all request arguments
 	const options = {
-		url: `http://${USER}:${PASS}@127.0.0.1:8332/`,
+		url: `http://${USER}:${PASS}@54.167.84.55:8332/`,
 		method: 'POST',
 		headers: headers,
 		body: dataString
@@ -55,37 +55,39 @@ walletRouter.get('/get', (req, res) => {
 
 	const privKeyDataString = `{"jsonrpc": "1.0", "id": "curltest", "method": "dumpprivkey", "params": ["${walletAddress}"] }`;
 	const privKeyOptions = {
-		url: `http://${USER}:${PASS}@127.0.0.1:8332/`,
+		url: `http://${USER}:${PASS}@54.167.84.55:8332/`,
 		method: 'POST',
 		headers: headers,
 		body: privKeyDataString
 	};
 
-	const balDataString = `{"jsonrpc": "1.0", "id": "curltest, "method": "getbalance", "params": [] }`;
+	const balDataString = `{"jsonrpc": "1.0", "id": "curltest, "method": "getwalletinfo", "params": [] }`;
 	const balOptions = {
-		url: `http://${USER}:${PASS}@127.0.0.1:8332/`,
+		url: `http://${USER}:${PASS}@54.167.84.55:8332/`,
 		method: 'POST',
 		headers: headers,
 		body: balDataString
 	};
 
-
 	// The information required has to come from multiple requests
 	// so we use a promise chain to sequentially get that data and then return
 	// it to the user as JSON
-	request(privKeyOptions)
+	request(balOptions)
+		.then((response) => response.json())
+		.then((walletInfoRes) => {
+			const walletInfo = walletInfoRes;
+
+			return request(privKeyOptions);
+		})
 		.then((response) => response.json())
 		.then((privKeyRes) => {
 			const privKey = privKeyRes;
 
-			return request(balOptions);
-		})
-		.then((response) => response.json())
-		.then((balRes) => {
-			const balance = balRes;
-
-			res.json({ private_key: privKey, balance: balance });
+			res.json({ wallet_info: walletInfo, private_key: privKey });
 		});
+
+
+
 });
 
 // TO ADD NEW ROUTES WRITE THEM HERE
