@@ -30,8 +30,12 @@ walletRouter.get('/getinfo', (req, res) => {
 	};
 
 	callback = (error, response, body) => {
+		if (error) {
+			console.log(error);
+		}
 		if (!error && response.statusCode == 200) {
 			const data = JSON.parse(body);
+			console.log(data);
 			res.send(data);
 		}
 	};
