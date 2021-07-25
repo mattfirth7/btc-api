@@ -49,7 +49,7 @@ walletRouter.get('/getinfo', (req, res) => {
 		}
 	};
 	console.log('requested');
-	request(options).then((body) => console.log(body));
+	request(options, callback);
 	
 });
 
