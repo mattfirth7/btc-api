@@ -32,6 +32,7 @@ walletRouter.get('/getinfo', (req, res) => {
 	};
 
 	callback = (error, response, body) => {
+		console.log('callback');
 		if (error) {
 			console.log(error);
 		}
@@ -42,7 +43,7 @@ walletRouter.get('/getinfo', (req, res) => {
 		}
 	};
 
-	request(options, callback);
+	request(options).then((body) => console.log(body));
 });
 
 
