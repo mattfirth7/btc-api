@@ -26,7 +26,7 @@ walletRouter.get('/getinfo', (req, res) => {
 		headers: headers,
 		auth: {
 			user: USER,
-			pass: PASS
+			password: PASS
 		},
 		body: dataString
 	};
