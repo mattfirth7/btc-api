@@ -21,9 +21,13 @@ walletRouter.get('/getinfo', (req, res) => {
 	console.log('received');
 	const dataString = `{"jsonrpc:"1.0", "id":"curltest", "method":"getblockchaininfo", "params":[] }`;
 	const options = {
-		url: `http://${USER}:${PASS}@127.0.0.1:8332`,
+		url: `http://127.0.0.1:8332`,
 		method: 'POST',
 		headers: headers,
+		auth: {
+			user: USER,
+			pass: PASS
+		},
 		body: dataString
 	};
 
