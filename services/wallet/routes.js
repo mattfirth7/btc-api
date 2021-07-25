@@ -25,11 +25,8 @@ const walletRouter = express.Router();
 
 walletRouter.get('/getinfo', (req, res) => {
 	console.log('received');
-	client.getInfo().then((help) => console.log(help));
-
-	/*
 	const options = {
-		url: `http://${USER}:${PASS}@127.0.0.1:8332/`,
+		url: `http://${USER}:${PASS}@localhost:8332/`,
 		method: 'POST',
 		headers: headers,
 		body: JSON.stringify({
@@ -37,7 +34,7 @@ walletRouter.get('/getinfo', (req, res) => {
 			id: "curltest",
 			method: "getblockchaininfo",
 			params: []
-		})
+		});
 	};
 
 	callback = (error, response, body) => {
@@ -51,9 +48,9 @@ walletRouter.get('/getinfo', (req, res) => {
 			res.send(data);
 		}
 	};
-
+	console.log('requested');
 	request(options).then((body) => console.log(body));
-	*/
+	
 });
 
 
