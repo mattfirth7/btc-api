@@ -1,6 +1,7 @@
 const express = require('express');
 var request = require('request');
 const dotenv = require('dotenv');
+const bitcoin = require('bitcoin-core');
 dotenv.config();
 
 
@@ -8,6 +9,11 @@ dotenv.config();
 const USER = process.env.RPC_USER;
 const PASS = process.env.RPC_PASSWORD;
 
+const client = new bitcoin({
+	password: PASS,
+	username: USER,
+	port: 8332
+});
 
 const headers = {
 	"content-type": "text/plain;"
@@ -19,6 +25,9 @@ const walletRouter = express.Router();
 
 walletRouter.get('/getinfo', (req, res) => {
 	console.log('received');
+	client.getInfo().then((help) => console.log(help));
+
+	/*
 	const options = {
 		url: `http://${USER}:${PASS}@127.0.0.1:8332/`,
 		method: 'POST',
@@ -44,6 +53,7 @@ walletRouter.get('/getinfo', (req, res) => {
 	};
 
 	request(options).then((body) => console.log(body));
+	*/
 });
 
 
