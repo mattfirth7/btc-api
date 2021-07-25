@@ -34,7 +34,7 @@ walletRouter.get('/getinfo', (req, res) => {
 			id: "curltest",
 			method: "getblockchaininfo",
 			params: []
-		});
+		})
 	};
 
 	callback = (error, response, body) => {
