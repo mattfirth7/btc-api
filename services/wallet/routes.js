@@ -20,26 +20,30 @@ const client = new bitcoin({
 const walletRouter = express.Router();
 
 walletRouter.get('/getinfo', (req, res) => {
-	console.log('received');
-	const dataString = `{"jsonrpc":"2.0","id":"curltest","method":"getblockchaininfo","params":[] }`;
-	const options = {
-		url: `http://${USER}:${PASS}@127.0.0.1:8332/`,
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: dataString
+	var headers = {
+    	'Content-Type': 'application/json'
 	};
 
-	callback = (error, response, body) => {
-		if (error) {
-			console.log(error);
-		}
-		res.json(body);
+	var dataString = '{"jsonrpc":"2.0", "id":"curltest", "method":"getbloc kchaininfo", "params":[] }';
+
+	var options = {
+	    url: '127.0.0.1:8332/',
+	    method: 'POST',
+	    headers: headers,
+	    body: dataString,
+	    auth: {
+ 	       'user': 'swypebtcuser',
+ 	       'pass': 'swypebtctestpwd'
+ 	   }
 	};
-	console.log('requested');
+
+	function callback(error, response, body) {
+ 	   if (!error && response.statusCode == 200) {
+ 	       console.log(body);
+ 	   }
+	}
+
 	request(options, callback);
-	
 });
 
 
