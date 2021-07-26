@@ -28,7 +28,7 @@ transactionRouter.post('/send', (req, res) => {
 
 	// Neatly organizes all request arguments
 	const options = {
-		url: `http://${USER}:${PASS}@54.167.84.55:8332/`,
+		url: `http://${USER}:${PASS}@127.0.0.1:8332/`,
 		method: 'POST',
 		headers: headers,
 		body: dataString
