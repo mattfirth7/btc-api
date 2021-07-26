@@ -22,7 +22,7 @@ const walletRouter = express.Router();
 walletRouter.get('/getinfo', (req, res) => {
 	console.log('received');
 	const options = {
-		url: `localhost:8332/rest/chaininfo.json`,
+		url: `http://127.0.0.1:8332/rest/chaininfo.json`,
 		method: 'GET',
 		headers: {'Content-Type': 'application/json'}
 	};
@@ -31,8 +31,7 @@ walletRouter.get('/getinfo', (req, res) => {
 		if (error) {
 			console.log(error);
 		}
-		const data = JSON.parse(body);
-		res.json(data);
+		console.log(body);
 	};
 	console.log('requested');
 	request(options, callback);
