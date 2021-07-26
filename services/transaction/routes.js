@@ -48,27 +48,7 @@ transactionRouter.post('/send', (req, res) => {
 
 // New route /get with a JSON body to get info on a transaction
 transactionRouter.get('/get/:txid', (req, res) => {
-
-	// Takes transaction id from request JSON body
-	const txid = req.params.txid;
-
-	// Neatly organizes all request options
-	const options = {
-		url: `127.0.0.1:8332/rest/tx/${txid}.json`,
-		method: 'GET',
-		headers: headers
-	};
-
-	// If the request was successful, return the information to user
-	callback = (error, response, body) => {
-		if (!error && response.statusCode == 200) {
-			const data = JSON.parse(body);
-			res.json(data);
-		}
-	};
-
-	// Send request
-	request(options, callback);
+	res.json(requests.get(`http://127.0.0.1:8332/rest/tx/${req.params.txid}.json`));
 });
 
 // TO ADD NEW ROUTES WRITE THEM HERE
