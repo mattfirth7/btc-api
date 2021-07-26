@@ -33,7 +33,7 @@ walletRouter.get('/getinfo', (req, res) => {
 		if (error) {
 			console.log(error);
 		}
-		console.log(JSON.parse(response));
+		console.log(response);
 		console.log(JSON.stringify(body));
 		res.json(body);
 	};
