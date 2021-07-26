@@ -22,12 +22,10 @@ const walletRouter = express.Router();
 walletRouter.get('/getinfo', (req, res) => {
 	console.log('received');
 	const dataString = `{"jsonrpc":"2.0","id":"curltest","method":"getblockchaininfo","params":[] }`;
-	const auth = Buffer.from(USER + ':' + PASS).toString('base64');
 	const options = {
-		url: `127.0.0.1:8332/`,
+		url: `http://${USER}:${PASS}127.0.0.1:8332/`,
 		method: 'POST',
 		headers: {
-			Authorization: 'Basic' + auth,
 			'Content-Type': 'application/json'
 		},
 		body: dataString
