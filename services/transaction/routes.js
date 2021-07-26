@@ -47,10 +47,10 @@ transactionRouter.post('/send', (req, res) => {
 });
 
 // New route /get with a JSON body to get info on a transaction
-transactionRouter.get('/get', (req, res) => {
+transactionRouter.get('/get/:txid', (req, res) => {
 
 	// Takes transaction id from request JSON body
-	const txid = req.body.txid;
+	const txid = req.params.txid;
 
 	// Neatly organizes all request options
 	const options = {
