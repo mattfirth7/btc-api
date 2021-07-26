@@ -54,7 +54,7 @@ transactionRouter.get('/get/:txid', (req, res) => {
 
 	// Neatly organizes all request options
 	const options = {
-		url: `http://127.0.0.1:8332/rest/tx/${txid}.json`,
+		url: `127.0.0.1:8332/rest/tx/${txid}.json`,
 		method: 'GET',
 		headers: headers
 	};
@@ -63,7 +63,7 @@ transactionRouter.get('/get/:txid', (req, res) => {
 	callback = (error, response, body) => {
 		if (!error && response.statusCode == 200) {
 			const data = JSON.parse(body);
-			res.send(data);
+			res.json(data);
 		}
 	};
 
