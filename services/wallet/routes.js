@@ -21,24 +21,20 @@ const walletRouter = express.Router();
 
 walletRouter.get('/getinfo', (req, res) => {
 	console.log('received');
-	const dataString = `{"jsonrpc":"2.0","id":"curltest","method":"getblockchaininfo","params":[] }`;
+	const dataString = "{\"jsonrpc\":\"2.0\",\"id\":\"curltest\",\"method\":\"getblockchaininfo\",\"params\":[] }";
 	const options = {
-		url: `http://${USER}:${PASS}@localhost:8332/`,
+		url: `http://127.0.0.1:8332/`,
 		method: 'POST',
 		headers: {'Content-Type': 'application/json'},
+		auth: {
+			user: USER,
+			password: PASS,
+		},
 		body: dataString
 	};
 
 	callback = (error, response, body) => {
-		console.log('callback');
-		if (error) {
-			console.log(error);
-		}
-		if (!error && response.statusCode == 200) {
-			const data = JSON.parse(body);
-			console.log(data);
-			res.send(data);
-		}
+		res.send(body);
 	};
 	console.log('requested');
 	request(options, callback);
