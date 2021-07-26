@@ -48,7 +48,17 @@ transactionRouter.post('/send', (req, res) => {
 
 // New route /get with a JSON body to get info on a transaction
 transactionRouter.get('/get/:txid', (req, res) => {
-	res.json(requests.get(`http://127.0.0.1:8332/rest/tx/${req.params.txid}.json`));
+	var options = {
+		url: `http://127.0.0.1:8332/rest/tx/${req.params.txid}.json`
+	};
+
+	callback = (error, response, body) => {
+		if (!error && response.statusCode==200) {
+			const data = JSON.parse(body);
+			res.json(data);
+		}
+	}
+	request(options, callback);
 });
 
 // TO ADD NEW ROUTES WRITE THEM HERE
