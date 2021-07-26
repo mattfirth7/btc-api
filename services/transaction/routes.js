@@ -52,15 +52,11 @@ transactionRouter.get('/get', (req, res) => {
 	// Takes transaction id from request JSON body
 	const txid = req.body.txid;
 
-	// Adds the transaction id to JSON body format required by Bitcoin Core
-	const dataString = `{"jsonrpc": "1.0", "id": "curltest", "method": "gettransaction", "params": ["${txid}"] }`;
-
-	// Neatly organizes all request arguments
+	// Neatly organizes all request options
 	const options = {
-		url: `https://${USER}:${PASS}@54.167.84.55:8332/`,
-		method: 'POST',
-		headers: headers,
-		body: dataString
+		url: `http://127.0.0.1:8332/rest/tx/${txid}.json`,
+		method: 'GET',
+		headers: headers
 	};
 
 	// If the request was successful, return the information to user
