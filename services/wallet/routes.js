@@ -15,26 +15,18 @@ const client = new bitcoin({
 	port: 8332
 });
 
-const headers = {
-	"content-type": "text/plain;"
-};
-
 
 // Creates new set of routes for the wallet endpoints
 const walletRouter = express.Router();
 
 walletRouter.get('/getinfo', (req, res) => {
 	console.log('received');
+	const dataString = `{"jsonrpc":"2.0","id":"curltest","method":"getblockchaininfo","params":[] }`;
 	const options = {
 		url: `http://${USER}:${PASS}@localhost:8332/`,
 		method: 'POST',
-		headers: headers,
-		body: JSON.stringify({
-			jsonrpc: "1.0",
-			id: "curltest",
-			method: "getblockchaininfo",
-			params: []
-		})
+		headers: {'Content-Type': 'application/json'},
+		body: dataString
 	};
 
 	callback = (error, response, body) => {
