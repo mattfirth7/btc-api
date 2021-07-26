@@ -12,6 +12,7 @@ Written in NodeJS v16.2.0
 To interact with this API:
 
 Download [Insomnia](https://insomnia.rest/download), then send the appropriate request based on the following:
+
     #### Wallet
     * Create Wallet:
       * POST request to http://18.234.174.222:4444/api/wallet/create
