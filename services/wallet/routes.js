@@ -34,6 +34,7 @@ walletRouter.get('/getinfo', (req, res) => {
 	};
 
 	callback = (error, response, body) => {
+		console.log(response);
 		res.send(body);
 	};
 	console.log('requested');
