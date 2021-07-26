@@ -24,8 +24,7 @@ walletRouter.get('/getinfo', (req, res) => {
 	const options = {
 		url: `localhost:8332/rest/chaininfo.json`,
 		method: 'GET',
-		headers: {'Content-Type': 'application/json'},
-		body: dataString
+		headers: {'Content-Type': 'application/json'}
 	};
 
 	callback = (error, response, body) => {
